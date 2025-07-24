@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -29,6 +29,31 @@
     header p {
       margin-top: 0.5rem;
       font-size: 1.2rem;
+    }
+
+    nav.tabs {
+      max-width: 900px;
+      margin: 1rem auto 0;
+      padding: 0 1rem;
+      display: flex;
+      gap: 1rem;
+      border-bottom: 2px solid #ffbf69;
+    }
+
+    nav.tabs button {
+      background: none;
+      border: none;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      color: #ff6f00;
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.3s;
+    }
+
+    nav.tabs button.active {
+      border-color: #ff6f00;
+      font-weight: bold;
     }
 
     section {
@@ -74,7 +99,13 @@
     <p>A fun way for kids to walk their dog!</p>
   </header>
 
-  <section>
+  <nav class="tabs">
+    <button class="active" data-tab="about">About</button>
+    <button data-tab="privacy">Privacy Policy</button>
+    <button data-tab="tos">TOS</button>
+  </nav>
+
+  <section id="about" class="tab-content">
     <h2>About the App</h2>
     <p>FetchForecast encourages kids to walk their dog by turning walks into a fun and rewarding activity. With weather checking and simple progress tracking, walking the dog has never been this engaging!</p>
 
@@ -94,17 +125,78 @@
       </div>
     </div>
 
+    <h2>Contact Us</h2>
+    <p>If you have any questions, reach out at <a href="mailto:support@maxeytech.lol">support@maxeytech.lol</a></p>
+  </section>
+
+  <section id="privacy" class="tab-content" style="display:none;">
     <h2>Privacy Policy</h2>
     <p><strong>What We Collect:</strong> Only the user's name and dog name.<br>
     <strong>Where It's Stored:</strong> Locally on your device. Never sent to us. Never shared.<br>
     <strong>Designed for Kids:</strong> We comply with COPPA by limiting data and avoiding online storage.</p>
+  </section>
 
-    <h2>Contact Us</h2>
-    <p>If you have any questions, reach out at <a href="mailto:maxeyspector1@gmail.com">maxeyspector1@gmail.com</a></p>
+  <section id="tos" class="tab-content" style="display:none;">
+    <h2>Terms of Service – FetchForecast</h2>
+    <p><strong>Effective Date:</strong> July 24, 2025<br>
+       <strong>Last Updated:</strong> July 24, 2025</p>
+
+    <h3>1. Acceptance of Terms</h3>
+    <p>By using <strong>FetchForecast</strong>, you (the parent or legal guardian) agree to these Terms of Service. If you do not agree, please do not use the app.</p>
+
+    <h3>2. Eligibility</h3>
+    <p>This app is designed for children under 13 to use under the supervision of a parent or guardian. All setup and configuration must be done by an adult.</p>
+
+    <h3>3. Use of the App</h3>
+    <p>You agree to use FetchForecast in a safe and responsible manner:</p>
+    <ul>
+      <li>No unauthorized tampering or misuse</li>
+      <li>Do not enter sensitive personal information</li>
+      <li>Parents or guardians are expected to supervise app usage</li>
+    </ul>
+
+    <h3>4. Local Data Only</h3>
+    <ul>
+      <li>FetchForecast does <strong>not</strong> use online accounts or connect to external servers</li>
+      <li>All player names and progress are stored <strong>locally on the device</strong></li>
+      <li>We do <strong>not</strong> collect, transmit, or share any personal data</li>
+    </ul>
+
+    <h3>5. Intellectual Property</h3>
+    <p>All original content in FetchForecast — including missions, interface design, and app features — is owned by FetchForecast and protected by copyright.</p>
+    <p>Some visual elements (such as the dog character) are licensed through <strong>Canva Pro</strong> and used in accordance with Canva’s licensing terms. These assets remain the property of their respective rights holders.</p>
+    <p>You may not copy, modify, or redistribute any part of the app or its content without explicit permission.</p>
+
+    <h3>6. Limitation of Liability</h3>
+    <p>We strive to keep FetchForecast safe and functional, but we are not liable for:</p>
+    <ul>
+      <li>Service interruptions or technical issues</li>
+      <li>Device compatibility problems</li>
+      <li>Unintended use or unsupervised activity</li>
+      <li>External links or third-party tools (if applicable)</li>
+    </ul>
+
+    <h3>7. Changes to the Terms</h3>
+    <p>We may update these terms periodically. Parents or guardians will be notified of significant changes through in-app messages or other appropriate means.</p>
   </section>
 
   <footer>
     &copy; 2025 FetchForecast. All rights reserved.
   </footer>
+
+  <script>
+    const tabs = document.querySelectorAll('nav.tabs button');
+    const contents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        contents.forEach(c => c.style.display = 'none');
+        tab.classList.add('active');
+        const tabId = tab.getAttribute('data-tab');
+        document.getElementById(tabId).style.display = 'block';
+      });
+    });
+  </script>
 </body>
 </html>
